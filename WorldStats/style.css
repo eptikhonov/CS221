@@ -22,11 +22,12 @@ html {
     margin-right: 20px;
 }
 
-a,
+a:link,
 a:active,
 a:visited
 a:hover {
     text-decoration: none;
+    
 }
 
 .dropdown-menu {
@@ -78,6 +79,28 @@ ol {
     -moz-column-count: 6;
     column-count: 6;
     grid-auto-columns: auto;
+}
+
+li {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+#view_form {
+    display:inline;
+}
+
+#view_button {
+    background:none;
+    border:none;
+    color:#fff;
+    cursor:pointer
+}
+
+.formLinks li{
+    text-align: left;
+    color: pink;
 }
 
 /* bootstrap navbar color #212529 */
