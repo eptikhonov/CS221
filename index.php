@@ -2,7 +2,7 @@
 
     $servername = "localhost";
     $username = "root";
-    $password = "password";
+    $password = "";
     $database_name = 'WorldStats';
 
     $conn = mysqli_connect($servername, $username, $password, $database_name);
@@ -154,13 +154,11 @@
                 </form>
                 <hr>
                 <?php
-                $selected_rankby = $_GET['rankby'];
-                $selected_continent = $_GET['continent'];
 
                 // rank countries by link categories
-                if (isset($selected_rankby)) {
+                if (isset($_GET['rankby'])) {
                     echo '<b>Rankings</b>';
-                    $query = 'SELECT Country FROM countries_of_the_world ORDER BY ' . $selected_rankby . ' DESC';
+                    $query = 'SELECT Country FROM countries_of_the_world ORDER BY ' . $_GET['rankby'] . ' DESC';
                     $result = mysqli_query($conn, $query);
                     echo '<ol>';
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -207,9 +205,9 @@
                 }
 
                 // get all countries in the continent and the continent's information
-                if (isset($selected_continent)) {
+                if (isset($_GET['continent'])) {
 
-                    $query = 'SELECT * FROM continents_of_the_world WHERE ID = ' . $selected_continent;
+                    $query = 'SELECT * FROM continents_of_the_world WHERE ID = ' . $_GET['continent'];
                     $result = mysqli_query($conn, $query);
                     $row = mysqli_fetch_assoc($result);
 
@@ -218,9 +216,9 @@
                     echo '<li> Population: ' . $row["Population"] . '</li>';
                     echo '<li> Area (sq. mi.): ' . $row["Area_sq_mi"] . '</li>';
 
-                    $query = 'SELECT * FROM countries_of_the_world AS R, continents_of_the_world AS I WHERE R.Continent = ' . $selected_continent . ' AND I.Id = ' . $selected_continent;
+                    $query = 'SELECT * FROM countries_of_the_world AS R, continents_of_the_world AS I WHERE R.Continent = ' . $_GET['continent'] . ' AND I.Id = ' . $_GET['continent'];
                     $result = mysqli_query($conn, $query);
- 
+
                     echo '</ul><li> Countries: </li><ol>';
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<li>' . $row["Country"] . '</li>';
